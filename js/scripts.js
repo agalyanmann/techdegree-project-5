@@ -1,5 +1,5 @@
 /**
- * Creat and append search input to DOM
+ * Create and append search input to DOM
  */
 const searchDiv = document.querySelector(".search-container");
 
