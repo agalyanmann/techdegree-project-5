@@ -10,3 +10,19 @@ searchDiv.innerHTML = `
     </form>
 `;
 
+/**
+ * App Logic
+ */
+const user = "https://randomuser.me/api/";
+
+function getUser(url) {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => data.results)
+    .then(result => result[0])
+    .then(userData => {
+      return console.log(userData);
+    });
+}
+
+getUser(user);
