@@ -17,19 +17,26 @@ searchDiv.innerHTML = `
 const userUrl =
   "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/";
 const galleryDiv = document.querySelector("#gallery");
-const profiles = [];
-for (let i = 0; i < 12; i++) {
-  generateUser(userUrl);
+
+generateUser(userUrl).then(data => console.log(data[0]));
+
+function test(data) {
+  return data[0];
 }
 
 function generateUser(api) {
-  fetch(api)
-    .then(response => response.json())
-    .then(data => data.results[0])
-    .then(userInfo => profiles.push(userInfo));
+  const userGroup = new Promise((resolve, reject) => {
+    const profiles = [];
+    for (let i = 0; i < 12; i++) {
+      fetch(api)
+        .then(response => response.json())
+        .then(data => data.results[0])
+        .then(userInfo => profiles.push(userInfo));
+    }
+    resolve(profiles);
+  });
+  return userGroup;
 }
-
-galleryDiv.innerHTML = `<p>${profiles.gender}</p>`;
 
 function generateGallery(userInfo) {
   const cardDiv = createElement("div");
