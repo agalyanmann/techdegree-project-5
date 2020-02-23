@@ -13,16 +13,19 @@ searchDiv.innerHTML = `
 /**
  * App Logic
  */
-const user = "https://randomuser.me/api/";
+const userUrl = "https://randomuser.me/api/";
+const galleryDiv = document.querySelector('#gallery');
 
-function getUser(url) {
-  fetch(url)
-    .then(response => response.json())
-    .then(data => data.results)
-    .then(result => result[0])
-    .then(userData => {
-      return console.log(userData);
-    });
+function generateUser(api) {
+	fetch(api)
+		.then(response => response.json())
+		.then(data => data.results[0])
+		.then(userInfo => generateGallery(userInfo));
 }
 
-getUser(user);
+function generateGallery(userInfo) {
+	galleryDiv.append(userInfo.cell);
+}
+
+
+generateUser(userUrl);
