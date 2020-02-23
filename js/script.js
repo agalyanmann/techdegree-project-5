@@ -13,28 +13,32 @@ searchDiv.innerHTML = `
 /**
  * App Logic
  */
-const userUrl = "https://randomuser.me/api/";
-const galleryDiv = document.querySelector('#gallery');
+const userUrl = "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/";
+const galleryDiv = document.querySelector("#gallery");
 
 function createElement(element) {
-	const elementType = document.createElement(element);
-	return elementType;
+  const elementType = document.createElement(element);
+  return elementType;
 }
 
 function generateUser(api) {
-	fetch(api)
-		.then(response => response.json())
-		.then(data => data.results[0])
-		.then(userInfo => generateGallery(userInfo));
+  fetch(api)
+    .then(response => response.json())
+    .then(data => data.results[0])
+    .then(userInfo => generateGallery(userInfo));
 }
 
 function generateGallery(userInfo) {
-	const cardDiv = createElement("div");
-	const cardImageDiv = createElement("div");
-	cardDiv.className = "card";
-	cardImageDiv.className = "card-img-container";
-	galleryDiv.append(cardDiv);
-	cardDiv.append(cardImageDiv);
-console.log(userInfo);
-	cardImageDiv.innerHTML = `<img class="card-img" src="${userInfo.picture.large}" alt="profile picture">`
+  const cardDiv = createElement("div");
+  const cardImageDiv = createElement("div");
+  cardDiv.className = "card";
+  cardImageDiv.className = "card-img-container";
+  galleryDiv.append(cardDiv);
+  cardDiv.append(cardImageDiv);
+  console.log(userInfo);
+  cardImageDiv.innerHTML = `<img class="card-img" src="${userInfo.picture.large}" alt="profile picture">`;
+}
+
+for (let i = 0; i < 12; i++) {
+  generateUser(userUrl);
 }
