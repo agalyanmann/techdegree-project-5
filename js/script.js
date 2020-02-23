@@ -17,7 +17,7 @@ searchDiv.innerHTML = `
 const userUrl =
   "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/";
 const galleryDiv = document.querySelector("#gallery");
-
+const profiles = [];
 for (let i = 0; i < 12; i++) {
   generateUser(userUrl);
 }
@@ -26,8 +26,10 @@ function generateUser(api) {
   fetch(api)
     .then(response => response.json())
     .then(data => data.results[0])
-    .then(userInfo => generateGallery(userInfo));
+    .then(userInfo => profiles.push(userInfo));
 }
+
+galleryDiv.innerHTML = `<p>${profiles.gender}</p>`;
 
 function generateGallery(userInfo) {
   const cardDiv = createElement("div");
