@@ -29,29 +29,15 @@ function generateUser(api) {
     .then(userInfo => generateGallery(userInfo));
 }
 
-class Profile {
-  constructor(json) {
-    (this.img = json.picture.large),
-      (this.first = json.name.first),
-      (this.last = json.name.last),
-      (this.email = json.email),
-      (this.city = json.location.city),
-      (this.state = json.location.state);
-  }
-}
-
 function generateGallery(userInfo) {
-  let profile = new Profile(userInfo);
-  console.log(profile);
-
-  //   const cardDiv = createElement("div");
-  //   const cardImageDiv = createElement("div");
-  //   cardDiv.className = "card";
-  //   cardImageDiv.className = "card-img-container";
-  //   galleryDiv.append(cardDiv);
-  //   cardDiv.append(cardImageDiv);
-  //   console.log(userInfo);
-  //   cardImageDiv.innerHTML = `<img class="card-img" src="${userInfo.picture.large}" alt="profile picture">`;
+  const cardDiv = createElement("div");
+  const cardImageDiv = createElement("div");
+  cardDiv.className = "card";
+  cardImageDiv.className = "card-img-container";
+  galleryDiv.append(cardDiv);
+  cardDiv.append(cardImageDiv);
+  console.log(userInfo);
+  cardImageDiv.innerHTML = `<img class="card-img" src="${userInfo.picture.large}" alt="profile picture">`;
 }
 
 for (let i = 0; i < 12; i++) {
