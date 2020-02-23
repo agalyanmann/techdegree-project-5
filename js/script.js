@@ -16,6 +16,11 @@ searchDiv.innerHTML = `
 const userUrl = "https://randomuser.me/api/";
 const galleryDiv = document.querySelector('#gallery');
 
+function createElement(element) {
+	const elementType = document.createElement(element);
+	return elementType;
+}
+
 function generateUser(api) {
 	fetch(api)
 		.then(response => response.json())
@@ -24,8 +29,12 @@ function generateUser(api) {
 }
 
 function generateGallery(userInfo) {
-	galleryDiv.append(userInfo.cell);
+	const cardDiv = createElement("div");
+	const cardImageDiv = createElement("div");
+	cardDiv.className = "card";
+	cardImageDiv.className = "card-img-container";
+	galleryDiv.append(cardDiv);
+	cardDiv.append(cardImageDiv);
+console.log(userInfo);
+	cardImageDiv.innerHTML = `<img class="card-img" src="${userInfo.picture.large}" alt="profile picture">`
 }
-
-
-generateUser(userUrl);
