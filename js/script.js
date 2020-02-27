@@ -18,50 +18,5 @@ const userUrl =
   "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/";
 const galleryDiv = document.querySelector("#gallery");
 
-generateUser(userUrl).then(data => console.log(data[0]));
 
-function test(data) {
-  return data[0];
-}
 
-function generateUser(api) {
-  const userGroup = new Promise((resolve, reject) => {
-    const profiles = [];
-    for (let i = 0; i < 12; i++) {
-      fetch(api)
-        .then(response => response.json())
-        .then(data => data.results[0])
-        .then(userInfo => profiles.push(userInfo));
-    }
-    resolve(profiles);
-  });
-  return userGroup;
-}
-
-function generateGallery(userInfo) {
-  const cardDiv = createElement("div");
-  const cardImageDiv = createElement("div");
-  const cardInfoDiv = createElement("div");
-
-  cardDiv.className = "card";
-  cardImageDiv.className = "card-img-container";
-  cardInfoDiv.className = "card-info-container";
-
-  galleryDiv.append(cardDiv);
-  cardDiv.append(cardImageDiv);
-  cardDiv.append(cardInfoDiv);
-
-  cardImageDiv.innerHTML = `
-    <img class="card-img" src="${userInfo.picture.large}" alt="profile picture">
-  `;
-  cardInfoDiv.innerHTML = `
-    <h3 id="name" class="card-name cap">${userInfo.name.first} ${userInfo.name.last}</h3>
-    <p class="card-text">${userInfo.email}</p>
-    <p class="card-text cap">${userInfo.location.city}, ${userInfo.location.state}</p>
-  `;
-}
-
-function createElement(element) {
-  const elementType = document.createElement(element);
-  return elementType;
-}
