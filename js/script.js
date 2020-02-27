@@ -15,16 +15,14 @@ searchDiv.innerHTML = `
  */
 
 const userUrl =
-  "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/";
+  "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/?results=12";
 const galleryDiv = document.querySelector("#gallery");
 let users = [];
 
-for (let i = 0; i < 12; i++) {
-  getUser(userUrl);
-}
+getUser(userUrl);
 
 /**
- * Calls random user api 
+ * Calls random user api
  */
 function getUser(api) {
   fetch(api)
@@ -64,5 +62,3 @@ function generateHTML() {
   `;
   });
 }
-
-
