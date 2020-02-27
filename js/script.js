@@ -17,6 +17,52 @@ searchDiv.innerHTML = `
 const userUrl =
   "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/";
 const galleryDiv = document.querySelector("#gallery");
+let users = [];
 
+for (let i = 0; i < 12; i++) {
+  getUser(userUrl);
+}
+
+/**
+ * Calls random user api 
+ */
+function getUser(api) {
+  fetch(api)
+    .then(response => response.json())
+    .then(data => data.results)
+    .then(user => {
+      users = [...user];
+    })
+    .then(generateHTML);
+}
+
+/**
+ * Maps over users array to generate HTML
+ */
+function generateHTML() {
+  users.map(user => {
+    const cardDiv = document.createElement("div");
+    const imgDiv = document.createElement("div");
+    const infoDiv = document.createElement("div");
+
+    cardDiv.className = "card";
+    imgDiv.className = "card-img-container";
+    infoDiv.className = "card-info-conatiner";
+
+    galleryDiv.append(cardDiv);
+    cardDiv.append(imgDiv);
+    cardDiv.append(infoDiv);
+
+    imgDiv.innerHTML = `
+    <img class="card-img" src="${user.picture.large}" alt="profile picture">
+  `;
+
+    infoDiv.innerHTML = `
+    <h3 id="name" class="card-name cap">${user.name.first} ${user.name.last}</h3>
+    <p class="card-text">${user.email}</p>
+    <p class="card-text cap">${user.location.city}, ${user.location.state}</p>
+  `;
+  });
+}
 
 
