@@ -17,6 +17,7 @@ searchDiv.innerHTML = `
 const userUrl =
   "https://cors-anywhere.herokuapp.com/https://randomuser.me/api/?results=12";
 const galleryDiv = document.querySelector("#gallery");
+const body = document.querySelector('body');
 let users = [];
 
 getUser(userUrl);
@@ -62,3 +63,10 @@ function generateHTML() {
   `;
   });
 }
+
+galleryDiv.addEventListener('click', event => {
+  users.map(user => {
+    const modalContainer = document.createElement('div');
+    const modalDiv = document.createElement('div');
+  })
+})
