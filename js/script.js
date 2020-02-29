@@ -15,7 +15,7 @@ searchDiv.innerHTML = `
  */
 
 const userUrl =
-  "https://randomuser.me/api/?results=12";
+  "https://randomuser.me/api/?results=12&nat=us";
 const galleryDiv = document.querySelector("#gallery");
 const body = document.querySelector("body");
 let users = [];
@@ -39,7 +39,7 @@ function getUser(api) {
  * Maps over users array to generate HTML
  */
 function generateHTML() {
-  users.map(user => {
+  users.map(async (user) => {
     const cardDiv = document.createElement("div");
     const modalDiv = document.createElement("div");
     const script = document.querySelector("script");
