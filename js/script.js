@@ -41,18 +41,34 @@ function getUser(api) {
 function generateHTML() {
   users.map(user => {
     const cardDiv = document.createElement("div");
+    const modalDiv = document.createElement("div");
+    const script = document.querySelector('script');
+
     cardDiv.className = "card";
+    modalDiv.className = "modal-container";
     galleryDiv.append(cardDiv);
+    body.insertBefore(modalDiv, script);
+    modalDiv.style.display = 'none';
 
     cardDiv.innerHTML = `
       <div class="card-img-container">
         <img class="card-img" src="${user.picture.large}" alt="profile picture">
       </div>   
       <div class="card-info-container">
-        <h3 id="name" class="card-name cap">${user.name.first} ${user.name.last}</h3>
+        <h3 id="${user.name.first} ${user.name.last}" class="card-name cap">${user.name.first} ${user.name.last}</h3>
         <p class="card-text">${user.email}</p>
         <p class="card-text cap">${user.location.city}, ${user.location.state}</p>
       </div>
+    `;
+
+    modalDiv.innerHTML = `
+      <div class="modal">
+        <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+        <div class="modal-info-container">
+          <img class="modal-img" src="${user.picture.large}" alt="profile picture">
+          <h3 id="${user.name.first} ${user.name.last}" class="modal-name cap">${user.name.first} ${user.name.last}</h3>
+        </div>
+      </div> 
     `;
   });
 }
