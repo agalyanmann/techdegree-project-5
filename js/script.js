@@ -10,6 +10,12 @@ searchDiv.innerHTML = `
     </form>
 `;
 
+document.querySelector('#search-input').focus();
+
+searchDiv.addEventListener('keyup', event => {
+  console.log(event.key);
+})
+
 /**
  * MAIN GALLERY
  */
