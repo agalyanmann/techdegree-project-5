@@ -1,5 +1,5 @@
 /**
- * Create and append search input to DOM
+ * Global Variables
  */
 const searchDiv = document.querySelector(".search-container");
 const userUrl = "https://randomuser.me/api/?results=12&nat=us";
@@ -11,6 +11,9 @@ searchError.style.display = "none";
 galleryDiv.append(searchError);
 searchError.innerText = "Sorry, there are no employees that match your search.";
 
+/**
+ * Search Field and Functions
+ */
 searchDiv.innerHTML = `
     <form action="#" method="get">
         <input type="search" id="search-input" class="search-input" placeholder="Search...">
@@ -88,32 +91,22 @@ function generateHTML() {
 
     modalDiv.innerHTML = `
       <div class="modal">
-        <button type="button" id="${user.name.first}-${
-      user.name.last
-    }-modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+        <button type="button" id="${user.name.first}-${user.name.last}-modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
         <div class="modal-info-container">
-          <img class="modal-img" src="${
-            user.picture.large
-          }" alt="profile picture">
-          <h3 id="${user.name.first}-${
-      user.name.last
-    }-modal" class="modal-name cap">${user.name.first} ${user.name.last}</h3>
+          <img class="modal-img" src="${user.picture.large}" alt="profile picture">
+          <h3 id="${user.name.first}-${user.name.last}-modal" class="modal-name cap">${user.name.first} ${user.name.last}</h3>
           <p class="modal-text">${user.email}</p>
           <p class="modal-text cap">${user.location.city}</p>
           <hr>
           <p class="modal-text>${user.cell}</p>
-          <p class="modal-text">${user.location.street.number} ${
-      user.location.street.name
-    }, ${user.location.city}, ${user.location.state} ${
-      user.location.postcode
-    }</p>
-          <p class="modal-text">Birthday: ${user.dob.date.substring(
-            5,
-            7
-          )}-${user.dob.date.substring(8, 10)}-${user.dob.date.substring(0, 4)}
-          </p>
+          <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
+          <p class="modal-text">Birthday: ${user.dob.date.substring(5, 7)}-${user.dob.date.substring(8, 10)}-${user.dob.date.substring(0, 4)}</p>
         </div>
       </div> 
+      <div class="modal-btn-container">
+        <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+        <button type="button" id="modal-next" class="modal-next btn">Next</button>
+      </div>
     `;
 
     cardDiv.addEventListener("click", () => {
