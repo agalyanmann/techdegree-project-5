@@ -67,7 +67,7 @@ function getUser(api) {
  * Maps over users array to generate HTML
  */
 function generateHTML() {
-  users.map(async user => {
+  users.map(user => {
     const cardDiv = document.createElement("div");
     const modalDiv = document.createElement("div");
     const script = document.querySelector("script");
@@ -104,19 +104,34 @@ function generateHTML() {
         </div>
       </div> 
       <div class="modal-btn-container">
-        <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-        <button type="button" id="modal-next" class="modal-next btn">Next</button>
+        <button type="button" id="${user.name.first}-${user.name.last}-modal-prev" class="modal-prev btn">Prev</button>
+        <button type="button" id="${user.name.first}-${user.name.last}-modal-next" class="modal-next btn">Next</button>
       </div>
     `;
+
+    /**
+     * Modal click handlers and variables.
+     */
+    const nextBtn = document.querySelector(`#${user.name.first}-${user.name.last}-modal-next`);
+    const prevBtn = document.querySelector(`#${user.name.first}-${user.name.last}-modal-prev`);
+    const closeBtn = document.querySelector(`#${user.name.first}-${user.name.last}-modal-close-btn`);
 
     cardDiv.addEventListener("click", () => {
       modalDiv.style.display = "";
     });
 
-    document
-      .querySelector(`#${user.name.first}-${user.name.last}-modal-close-btn`)
-      .addEventListener("click", () => {
+    closeBtn.addEventListener("click", () => {
         modalDiv.style.display = "none";
       });
+
+    nextBtn.addEventListener("click", () => {
+      modalDiv.style.display = "none";
+      modalDiv.nextElementSibling.style.display = "";
+    });
+
+    prevBtn.addEventListener("click", () => {
+      modalDiv.style.display = "none";
+      modalDiv.previousElementSibling.style.display = "";
+    });
   });
 }
