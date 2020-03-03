@@ -1,18 +1,30 @@
 /**
- * Global Variables
+ * Treehouse FSJS Techdegree
+ * Project 5 - Public Api Request
+ * script.js
  */
-const searchDiv = document.querySelector(".search-container");
+
+
+//api url
 const userUrl = "https://randomuser.me/api/?results=12&nat=us";
+
+//grab needed DOM elements
+const searchDiv = document.querySelector(".search-container");
 const galleryDiv = document.querySelector("#gallery");
 const body = document.querySelector("body");
+
+//search handler variables
 let users = [];
 const searchError = document.createElement("h1");
 searchError.style.display = "none";
 galleryDiv.append(searchError);
 searchError.innerText = "Sorry, there are no employees that match your search.";
 
+
 /**
- * Search Field and Functions
+ * Create search field
+ * Event listener for input
+ * Funtion to dynamically alter display 
  */
 searchDiv.innerHTML = `
     <form action="#" method="get">
@@ -45,13 +57,19 @@ function searchField(input, searchList) {
 }
 
 /**
- * MAIN GALLERY
+ * Main app functions and logic
+ * Will initialize with getUser()
+ * getUser() will run asynch through remainder of the funcions
  */
 
+//initialize app
 getUser(userUrl);
 
 /**
  * Calls random user api
+ * passes data to JSON
+ * creates a reff array
+ * then calls generateHTML()
  */
 function getUser(api) {
   fetch(api)
@@ -65,6 +83,9 @@ function getUser(api) {
 
 /**
  * Maps over users array to generate HTML
+ * Initially creates main gallery
+ * Then hidden modal displays
+ * Followed by event handlers for navigation
  */
 function generateHTML() {
   users.map(user => {
@@ -77,7 +98,8 @@ function generateHTML() {
     galleryDiv.append(cardDiv);
     body.insertBefore(modalDiv, script);
     modalDiv.style.display = "none";
-
+    
+    //main gallery html
     cardDiv.innerHTML = `
       <div class="card-img-container">
         <img class="card-img" src="${user.picture.large}" alt="profile picture">
@@ -89,6 +111,7 @@ function generateHTML() {
       </div>
     `;
 
+    //modal html
     modalDiv.innerHTML = `
       <div class="modal">
         <button type="button" id="${user.name.first}-${user.name.last}-modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
