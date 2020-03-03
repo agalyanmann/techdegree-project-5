@@ -71,8 +71,6 @@ function generateHTML() {
     const cardDiv = document.createElement("div");
     const modalDiv = document.createElement("div");
     const script = document.querySelector("script");
-    const prevBtn = document.querySelector("#modal-prev");
-    const nextBtn = document.querySelector("#mocal-next");
 
     cardDiv.className = "card";
     modalDiv.className = "modal-container";
@@ -120,6 +118,5 @@ function generateHTML() {
       .addEventListener("click", () => {
         modalDiv.style.display = "none";
       });
-    
   });
 }
